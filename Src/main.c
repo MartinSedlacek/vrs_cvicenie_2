@@ -53,7 +53,7 @@ int main(void)
     /*GPIO MODER register*/
     //Set mode for pin 3
 	GPIOA_MODER_REG &= ~(uint32_t)(0x3 << 6);
-	GPIOA_MODER_REG |= (uint32_t)(1 << 6);
+	//GPIOA_MODER_REG |= (uint32_t)(1 << 6);
 
 	//Set mode for pin 4
 	GPIOA_MODER_REG &= ~(uint32_t)(0x3 << 8);
@@ -75,22 +75,22 @@ int main(void)
 
   while (1)
   {
-	  if(BUTTON_GET_STATE)
+	  if(!BUTTON_GET_STATE)
 	  {
 		  // 0.25s delay
-		  LL_mDelay(250);
+		  for(uint16_t i = 0; i < 0xFF00; i++){}
 		  LED_ON;
 		  // 0.25s delay
-		  LL_mDelay(250);
+		  for(uint16_t i = 0; i < 0xFF00; i++){}
 		  LED_OFF;
 	  }
 	  else
 	  {
 		  // 1s delay
-		  LL_mDelay(1000);
+		  for(uint32_t i = 0; i < 0xFFFF0; i++){}
 		  LED_ON;
 		  // 1s delay
-		  LL_mDelay(1000);
+		  for(uint32_t i = 0; i < 0xFFFF0; i++){};
 		  LED_OFF;
 	  }
   }

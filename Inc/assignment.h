@@ -16,7 +16,7 @@
 
 /* General purpose input output port A macros */
 //GPIOA peripheral base address
-#define	GPIOA_BASE_ADDR			*((volatile uint32_t *)(uint32_t)(0x48000000U))
+#define	GPIOA_BASE_ADDR			((uint32_t)(0x48000000U))
 //MODER register
 #define	GPIOA_MODER_REG			*((volatile uint32_t *)(uint32_t)(GPIOA_BASE_ADDR + 0x00U))
 //OTYPER register
@@ -36,15 +36,14 @@
 
 /*Reset clock control register macros */
 //RCC base address
-#define	RCC_BASE_ADDR			*((volatile uint32_t *)(uint32_t)(0x40021000U))
+#define	RCC_BASE_ADDR			(uint32_t)(0x40021000U)
 //AHBEN register
-#define	RCC_AHBENR_REG			*((volatile uint32_t *)(uint32_t)(RCC_BASE_ADDR + 0x14U))
+#define	RCC_AHBENR_REG			*((volatile uint32_t *)(RCC_BASE_ADDR + 0x14U))
 
 /* LED and button macros */
-#define LED_ON					*((volatile uint32_t *)((uint32_t)(GPIOA_BSRR_REG))) |= (1 << 4)
-#define LED_OFF					*((volatile uint32_t *)((uint32_t)(GPIOA_BRR_REG))) |= (1 << 4)
+#define LED_ON					*((volatile uint32_t *)((uint32_t)(GPIOA_BASE_ADDR + 0x18U))) |= (1 << 4)  //GPIOA pin 4/* Add LED_ON implementation here. */
+#define LED_OFF					*((volatile uint32_t *)((uint32_t)(GPIOA_BASE_ADDR + 0x28U))) |= (1 << 4);/* Add LED_OFF implementation here. */
 
-#define BUTTON_GET_STATE		*((volatile uint32_t *)((uint32_t)(GPIOA_IDR_REG))) & (1 << 3)
-
+#define BUTTON_GET_STATE		(*((volatile uint32_t *)((uint32_t)(GPIOA_BASE_ADDR + 0x10U))) & (1 << 3))/* Add BUTTON_GET_STATE implementation here. */
 
 #endif /* ASSIGNMENT_H_ */
